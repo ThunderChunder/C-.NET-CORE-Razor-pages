@@ -1,0 +1,32 @@
+dotnet new webapp -o *project name*
+
+dotnet run
+    -Runs local IIS server to serve project 
+
+dotnet new page -n Index -na MyProject.Pages -o Pages
+    -This will create index.cshtml and index.cshtml.cs file under pages folder
+
+dotnet ef database update --context *Database Context Class name*
+    -Specifies which DB context to use in database migrations
+
+dotnet ef migrations add *script name*
+    -Adds a new migration (Models get parsed into sql create statements)
+
+dotnet ef database update
+    -Runs migrations scripts
+
+dotnet add package *Package name* --version *version of package*
+    -adds nuget package to dependencies, can copy command from nuget.com
+
+dotnet remove package *package name to be removed*
+    -removes specified package from package dependencies
+
+sqlcmd -S localhost -U SA
+    -cmd command to login to mssql server
+
+sqlcmd -S localhost -U SA -d BarterDB -Q "select * from Item" -s "," -o "/home/brian/Desktop/result.txt"
+    -output query result to text file. Format is horrid though....
+
+dotnet aspnet-codegenerator controller -outDir *path to write file* -name *Name of controller class*
+    -generate a controller class (dont forget to add/configure controller service to container!)
+    -(Also need to add mvc middleware to pipeline)
