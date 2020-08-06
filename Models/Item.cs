@@ -16,20 +16,24 @@ namespace barter_razor.Models
         [Required]
         public string Category { get; set; }
 
+        public Item(){}
+        public Item(Item item)
+        {
+            this.Id = item.Id;
+            this.Name = item.Name;
+            this.Price = item.Price;
+            this.Category = item.Category; 
+        }
+
     }
 
-    public class ItemUploader : Item
+    public class ItemRecord : Item
     {
         [ForeignKey("UserID")]
         [Required]
         public IdentityUser IdentityUser {get; set;}
 
-        public void copyItem(Item item)
-        {  
-            this.Id = item.Id;
-            this.Name = item.Name;
-            this.Price = item.Price;
-            this.Category = item.Category;         
-        }
+        public ItemRecord():base(){}
+        public ItemRecord(Item item, IdentityUser currentUser) :base(item){this.IdentityUser = currentUser;}
     }
 }

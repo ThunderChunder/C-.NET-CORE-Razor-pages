@@ -7,7 +7,7 @@ namespace barter_razor.Services
 {
     public class DBConnector : IdentityDbContext<IdentityUser> 
     {
-        public DbSet<ItemUploader> ItemUploaderRecords { get; set; }
+        public DbSet<ItemRecord> ItemRecords { get; set; }
         public DbSet<IdentityUser> UserNames {get;set;}
         public DBConnector(DbContextOptions<DBConnector> options) : base(options)
         {
@@ -17,7 +17,9 @@ namespace barter_razor.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Item>().ToTable("Item");
+            modelBuilder.Entity<ItemRecord>()
+                .ToTable("Item");
         }   
     }
 }
+

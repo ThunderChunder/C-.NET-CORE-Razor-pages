@@ -21,7 +21,7 @@ namespace barter_razor.Pages.ItemList
         [BindProperty]
         public Item Item {get; set;}
 
-        public ItemUploader ItemUploadRecord { get; set; }
+        public ItemRecord ItemUploadRecord { get; set; }
 
         public List<SelectListItem> Categories {get;}
 
@@ -63,7 +63,7 @@ namespace barter_razor.Pages.ItemList
             if(ModelState.IsValid)
             {
                 //Creates Item Upload record as global attribute
-                createItemUploadRecord();
+                createItemRecord();
                 //This adds Model Insert Query to DB context Queue 
                 await DBCommunicator.AddAsync(ItemUploadRecord);
                 //This executes DB context Queue queries 
@@ -76,13 +76,11 @@ namespace barter_razor.Pages.ItemList
             }
         }
 
-        private async void createItemUploadRecord()
+        private async void createItemRecord()
         {
             var user = await getCurrentUser();
 
-            ItemUploadRecord = new ItemUploader();
-            ItemUploadRecord.copyItem(Item);
-            ItemUploadRecord.IdentityUser = user;
+            ItemUploadRecord = new ItemRecord(Item, user);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace barter_razor.Pages.ItemList
     public class IndexModel : PageModel
     {
         private readonly DBConnector DBCommunicator;
-        public List<ItemUploader> Items { get; set;} 
+        public List<ItemRecord> Items { get; set;} 
         public IndexModel(DBConnector DBCommunicator)
         {
             this.DBCommunicator = DBCommunicator;
@@ -22,7 +22,7 @@ namespace barter_razor.Pages.ItemList
 
         public async Task OnGet()
         {
-            Items = await DBCommunicator.ItemUploaderRecords.ToListAsync();
+            Items = await DBCommunicator.ItemRecords.ToListAsync();
             await DBCommunicator.UserNames.ToListAsync();
         }
     }
